@@ -4,6 +4,7 @@ description: Learn how to use taints in an Azure Kubernetes Service (AKS) cluste
 author: allyford
 ms.author: schaffererin
 ms.topic: article 
+ms.custom: devx-track-azurecli
 ms.date: 05/07/2024
 # Customer intent: As a cluster operator, I want to learn how to use taints in an AKS cluster to ensure that pods are not scheduled onto inappropriate nodes.
 ---
@@ -78,7 +79,7 @@ This article assumes you have an existing AKS cluster. If you need an AKS cluste
 
 ## Use node initialization taints (preview)
 
-[!INCLUDE [preview features callout](includes/preview/preview-callout.md)]
+[!INCLUDE [preview features callout](~/reusable-content/ce-skilling/azure/includes/aks/includes/preview/preview-callout.md)]
 
 ### Prerequisites and limitations
 
@@ -249,6 +250,7 @@ This article assumes you have an existing AKS cluster. If you need an AKS cluste
     az aks nodepool update \
     --cluster-name $CLUSTER_NAME \
     --name $NODE_POOL_NAME \
+    --resource-group $RESOURCE_GROUP_NAME \
     --node-taints "sku=gpu:NoSchedule"
     ```
 
@@ -259,6 +261,7 @@ This article assumes you have an existing AKS cluster. If you need an AKS cluste
     ```azurecli-interactive
     az aks nodepool update \
     --cluster-name $CLUSTER_NAME \
+    --resource-group $RESOURCE_GROUP_NAME \
     --name $NODE_POOL_NAME \
     --node-taints ""
     ```
@@ -294,7 +297,7 @@ When you remove all initialization taint occurrences from node pool replicas, th
     az aks update \
     --resource-group $RESOURCE_GROUP_NAME \
     --name $CLUSTER_NAME \
-    --node-init-taints "sku=gpu:NoSchedule"
+    --node-init-taints ""
     ```
 
 ## Check that the taint has been removed from the node
